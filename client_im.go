@@ -7,7 +7,7 @@ import (
 )
 
 //UsersListAll 用户列表
-func (c *Client) UsersListAll(start, count uint32) (*UserListResponse, error) {
+func (c *Client) UsersListAll(start, count int) (*UserListResponse, error) {
 	args := fmt.Sprintf("/v1/users/?start=%d&count=%d", start, count)
 	link := c.imUrl + args
 	resp, err := c.request("GET", link, nil, false)

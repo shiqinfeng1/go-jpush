@@ -9,9 +9,9 @@ type User struct {
 	CTime    string `json:"ctime",omitempty`
 }
 type UserListResponse struct {
-	Total uint32 `json:"total",omitempty`
-	Start uint32 `json:"start",omitempty`
-	Count uint32 `json:"count",omitempty`
+	Total int    `json:"total",omitempty`
+	Start int    `json:"start",omitempty`
+	Count int    `json:"count",omitempty`
 	Users []User `json:"users",omitempty`
 }
 
@@ -35,15 +35,15 @@ type Message struct {
 	TromAppkey   string      `json:"from_appkey",omitempty`
 	TargetAppkey string      `json:"target_appkey",omitempty`
 	MsgBody      MessageBody `json:"msg_body",omitempty`
-	CreateTime   uint32      `json:"create_time",omitempty`
-	Version      uint32      `json:"version",omitempty`
-	MsgID        uint32      `json:"msgid",omitempty`
-	MsgLevel     uint32      `json:"msg_level",omitempty` // 0代表应用内消息 1代表跨应用消息
-	MsgCtime     uint32      `json:"msg_ctime",omitempty` // 服务器接收到消息的时间，单位毫秒
+	CreateTime   uint64      `json:"create_time",omitempty`
+	Version      int         `json:"version",omitempty`
+	MsgID        int         `json:"msgid",omitempty`
+	MsgLevel     int         `json:"msg_level",omitempty` // 0代表应用内消息 1代表跨应用消息
+	MsgCtime     uint64      `json:"msg_ctime",omitempty` // 服务器接收到消息的时间，单位毫秒
 }
 type MessageHistoryResponse struct {
-	Total    uint32    `json:"total",omitempty`
+	Total    int       `json:"total",omitempty`
 	Cursor   string    `json:"cursor",omitempty`
-	Count    uint32    `json:"count",omitempty`
+	Count    int       `json:"count",omitempty`
 	Messages []Message `json:"messages",omitempty`
 }
