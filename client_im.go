@@ -13,8 +13,12 @@ func (c *Client) UsersListAll(start, count uint32) (*UserListResponse, error) {
 	if err != nil {
 		return nil, err
 	}
+	mapped, err := resp.Map()
+	if err != nil {
+		return nil, err
+	}
 	var s UserListResponse
-	if err = mapstructure.Decode(resp.Map(), &s); err != nil {
+	if err = mapstructure.Decode(mapped, &s); err != nil {
 		return nil, err
 	}
 	return &s, nil
@@ -27,8 +31,12 @@ func (c *Client) UserStatus(userName string) (*UserStatusResponse, error) {
 	if err != nil {
 		return nil, err
 	}
+	mapped, err := resp.Map()
+	if err != nil {
+		return nil, err
+	}
 	var s UserStatusResponse
-	if err = mapstructure.Decode(resp.Map(), &s); err != nil {
+	if err = mapstructure.Decode(mapped, &s); err != nil {
 		return nil, err
 	}
 	return &s, nil
@@ -52,8 +60,12 @@ func (c *Client) MessageHistory(userName string, count uint32, cursor, start, en
 	if err != nil {
 		return nil, err
 	}
+	mapped, err := resp.Map()
+	if err != nil {
+		return nil, err
+	}
 	var s MessageHistoryResponse
-	if err = mapstructure.Decode(resp.Map(), &s); err != nil {
+	if err = mapstructure.Decode(mapped, &s); err != nil {
 		return nil, err
 	}
 	return &s, nil
