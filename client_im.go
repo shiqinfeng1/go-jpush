@@ -6,6 +6,7 @@ import (
 	"github.com/goinggo/mapstructure"
 )
 
+//UsersListAll 用户列表
 func (c *Client) UsersListAll(start, count uint32) (*UserListResponse, error) {
 	args := fmt.Sprintf("/v1/users/?start=%d&count=%d", start, count)
 	link := c.imUrl + args
@@ -24,6 +25,7 @@ func (c *Client) UsersListAll(start, count uint32) (*UserListResponse, error) {
 	return &s, nil
 }
 
+//UserStatus 用户状态
 func (c *Client) UserStatus(userName string) (*UserStatusResponse, error) {
 	args := fmt.Sprintf("/v1/users/%s/userstat", userName)
 	link := c.imUrl + args
@@ -42,6 +44,7 @@ func (c *Client) UserStatus(userName string) (*UserStatusResponse, error) {
 	return &s, nil
 }
 
+//MessageHistory 消息历史
 func (c *Client) MessageHistory(userName string, count uint32, cursor, start, end string) (*MessageHistoryResponse, error) {
 	var args string
 	if cursor == "" {
