@@ -16,12 +16,12 @@ type UserListResponse struct {
 }
 
 type UserStatusResponse struct {
-	login  bool `json:"login",omitempty`
-	online bool `json:"online",omitempty`
+	Login  bool `json:"login",omitempty`
+	Online bool `json:"online",omitempty`
 }
 type MessageBodyText struct {
-	text   string           `json:"text"`             //消息内容 （必填）
-	extras *json.RawMessage `json:"extras",omitempty` //选填的json对象 开发者可以自定义extras里面的key value（选填）
+	Text   string           `json:"text"`             //消息内容 （必填）
+	Extras *json.RawMessage `json:"extras",omitempty` //选填的json对象 开发者可以自定义extras里面的key value（选填）
 }
 type MessageBodyImage struct {
 	MediaID    string `json:"media_id"`       //文件上传之后服务器端所返回的key，用于之后生成下载的url（必填）
