@@ -14,6 +14,7 @@ func (c *Client) UsersListAll(start, count int) (*UserListResponse, error) {
 	if err != nil {
 		return nil, err
 	}
+	fmt.Printf("UsersListAll Resp=%+v", resp)
 	mapped, err := resp.Map()
 	if err != nil {
 		return nil, err
