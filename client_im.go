@@ -81,6 +81,9 @@ func (c *Client) MessageHistory(userName string, count uint32, cursor, start, en
 	if err != nil {
 		return nil, err
 	}
+	if len(resp.data) == 0 {
+		return &MessageHistoryResponse{}, nil
+	}
 	mapped, err := resp.Map()
 	if err != nil {
 		return nil, err
