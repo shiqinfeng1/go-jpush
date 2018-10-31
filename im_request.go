@@ -2,6 +2,13 @@ package jpush
 
 import "encoding/json"
 
+type ErrorMsg struct {
+	Error ErrorMsgBody `json:"error",omitempty`
+}
+type ErrorMsgBody struct {
+	Message string `json:"message",omitempty`
+	Code    int    `json:"code",omitempty`
+}
 type User struct {
 	UserName string `json:"username",omitempty`
 	NickName string `json:"nickname",omitempty`

@@ -14,10 +14,18 @@ func (c *Client) UsersListAll(start, count int) (*UserListResponse, error) {
 	if err != nil {
 		return nil, err
 	}
-	//fmt.Printf("UsersListAll Resp=%+v %s", resp, link)
-	mapped, err := resp.Map()
+	mapped, err := resp.Map() //{"error": {"message": "basic authentication failed", "code": 899008}}
 	if err != nil {
 		return nil, err
+	}
+	if _, exsit := mapped["error"]; exsit == true {
+		var e ErrorMsg
+		if err = mapstructure.Decode(mapped, &e); err != nil {
+			return nil, err
+		} else {
+			return nil, fmt.Errorf("JPush Returned Code:%d Msg:%v", e.Error.Code, e.Error.Message)
+		}
+
 	}
 	var s UserListResponse
 	if err = mapstructure.Decode(mapped, &s); err != nil {
@@ -37,6 +45,15 @@ func (c *Client) UserStatus(userName string) (*UserStatusResponse, error) {
 	mapped, err := resp.Map()
 	if err != nil {
 		return nil, err
+	}
+	if _, exsit := mapped["error"]; exsit == true {
+		var e ErrorMsg
+		if err = mapstructure.Decode(mapped, &e); err != nil {
+			return nil, err
+		} else {
+			return nil, fmt.Errorf("JPush Returned Code:%d Msg:%v", e.Error.Code, e.Error.Message)
+		}
+
 	}
 	var s UserStatusResponse
 	if err = mapstructure.Decode(mapped, &s); err != nil {
@@ -67,6 +84,15 @@ func (c *Client) MessageHistory(userName string, count uint32, cursor, start, en
 	mapped, err := resp.Map()
 	if err != nil {
 		return nil, err
+	}
+	if _, exsit := mapped["error"]; exsit == true {
+		var e ErrorMsg
+		if err = mapstructure.Decode(mapped, &e); err != nil {
+			return nil, err
+		} else {
+			return nil, fmt.Errorf("JPush Returned Code:%d Msg:%v", e.Error.Code, e.Error.Message)
+		}
+
 	}
 	var s MessageHistoryResponse
 	if err = mapstructure.Decode(mapped, &s); err != nil {
