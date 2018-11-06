@@ -26,18 +26,6 @@ func (c *Client) RegisterUsers(infos []*RegisterUserInfo) error {
 	if err != nil {
 		return err
 	}
-	for i := 0; i < len(arrayed); i++ {
-		result := make(map[string]interface{})
-		json.Unmarshal(arrayed[i], &result)
-		if _, exsit := result["error"]; exsit == true {
-			var e ErrorMsg
-			if err = mapstructure.Decode(result, &e); err != nil {
-				return err
-			} else {
-				return fmt.Errorf("JPush Returned Code:%d Msg:%v", e.Error.Code, e.Error.Message)
-			}
-		}
-	}
 	return nil
 }
 
