@@ -72,3 +72,8 @@ type MessageHistoryResponse struct {
 	Count    int       `json:"count",omitempty`
 	Messages []Message `json:"messages",omitempty`
 }
+
+type RegisterUserInfo struct {
+	USerName string `json:"username"`
+	Password string `json:"password"`
+}

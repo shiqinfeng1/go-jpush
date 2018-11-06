@@ -1,10 +1,45 @@
 package jpush
 
 import (
+	"bytes"
+	"encoding/json"
 	"fmt"
 
 	"github.com/goinggo/mapstructure"
 )
+
+//RegisterUsers 批量注册用户
+func (c *Client) RegisterUsers([]*RegisterUserInfo) error {
+
+	link := c.imUrl + "/v1/users/"
+
+	buf, err := json.Marshal(RegisterUserInfo)
+	if err != nil {
+		return err
+	}
+	resp, err := c.request("POST", link, bytes.NewReader(buf), false)
+	if err != nil {
+		return err
+	}
+
+	arrayed, err := resp.Array()
+	if err != nil {
+		return err
+	}
+	for i := 0; i < len(arrayed); i++ {
+		result := make(map[string]interface{})
+		json.Unmarshal(arrayed[i], &result)
+		if _, exsit := result["error"]; exsit == true {
+			var e ErrorMsg
+			if err = mapstructure.Decode(result, &e); err != nil {
+				return err
+			} else {
+				return fmt.Errorf("JPush Returned Code:%d Msg:%v", e.Error.Code, e.Error.Message)
+			}
+		}
+	}
+	return nil
+}
 
 //UsersListAll 用户列表
 func (c *Client) UsersListAll(start, count int) (*UserListResponse, error) {
