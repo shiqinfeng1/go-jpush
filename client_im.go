@@ -17,12 +17,7 @@ func (c *Client) RegisterUsers(infos []*RegisterUserInfo) error {
 	if err != nil {
 		return err
 	}
-	resp, err := c.request("POST", link, bytes.NewReader(buf), false)
-	if err != nil {
-		return err
-	}
-
-	arrayed, err := resp.Array()
+	_, err = c.request("POST", link, bytes.NewReader(buf), false)
 	if err != nil {
 		return err
 	}
