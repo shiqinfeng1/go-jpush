@@ -9,11 +9,11 @@ import (
 )
 
 //RegisterUsers 批量注册用户
-func (c *Client) RegisterUsers([]*RegisterUserInfo) error {
+func (c *Client) RegisterUsers(infos []*RegisterUserInfo) error {
 
 	link := c.imUrl + "/v1/users/"
 
-	buf, err := json.Marshal(RegisterUserInfo)
+	buf, err := json.Marshal(infos)
 	if err != nil {
 		return err
 	}
