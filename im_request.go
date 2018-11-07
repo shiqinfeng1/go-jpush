@@ -46,6 +46,19 @@ type MessageBodyVoice struct {
 	Hash       string `json:"hash",omitempty` //音频hash值（可选）
 	Fsize      int    `json:"fsize"`          //文件大小（字节数）（必填）
 }
+type MessageMinimum struct {
+	Version        int         `json:"version",omitempty`         //版本号 目前是1 （必填）
+	TargetType     string      `json:"target_type"`               //发送目标类型 single - 个人，group - 群组 chatroom - 聊天室（必填）
+	FromType       string      `json:"from_type"`                 //发送消息者身份 当前只限admin用户，必须先注册admin用户 （必填）
+	MsgType        string      `json:"msg_type"`                  //发消息类型 text - 文本，image - 图片, custom - 自定义消息（msg_body为json对象即可，服务端不做校验）voice - 语音 （必填）
+	TargetID       string      `json:"target_id"`                 //目标id single填username group 填Group id chatroom 填chatroomid（必填）
+	FromID         string      `json:"from_id"`                   //发送者的username （必填
+	NoOffline      bool        `json:"no_offline",omitempty`      //消息是否离线存储 true或者false，默认为false，表示需要离线存储（选填）
+	NoNotification bool        `json:"no_notification",omitempty` //消息是否在通知栏展示 true或者false，默认为false，表示在通知栏展示（选填）
+	MsgBody        interface{} `json:"msg_body"`                  //消息体,根据type不同结构不同
+	TargetName     string      `json:"target_name",omitempty`     //接受者展示名（选填）
+	FromName       string      `json:"from_name",omitempty`       //发送者展示名（选填）
+}
 type Message struct {
 	TargetType     string           `json:"target_type"`           //发送目标类型 single - 个人，group - 群组 chatroom - 聊天室（必填）
 	MsgType        string           `json:"msg_type"`              //发消息类型 text - 文本，image - 图片, custom - 自定义消息（msg_body为json对象即可，服务端不做校验）voice - 语音 （必填）
@@ -55,7 +68,7 @@ type Message struct {
 	FromName       string           `json:"from_name",omitempty`   //发送者展示名（选填）
 	FromType       string           `json:"from_type"`             //发送消息者身份 当前只限admin用户，必须先注册admin用户 （必填）
 	FromPlatform   string           `json:"from_platform",omitempty`
-	TromAppkey     string           `json:"from_appkey",omitempty`
+	FromAppkey     string           `json:"from_appkey",omitempty`
 	TargetAppkey   string           `json:"target_appkey"` //跨应用目标appkey（选填）
 	MsgBody        *json.RawMessage `json:"msg_body"`      //消息体,根据type不同结构不同
 	CreateTime     uint64           `json:"create_time",omitempty`
