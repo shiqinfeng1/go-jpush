@@ -24,6 +24,25 @@ func (c *Client) RegisterUsers(infos []*RegisterUserInfo) error {
 	return nil
 }
 
+//RegisterAdmin 注册管理员
+func (c *Client) RegisterAdmin(userName, password string) error {
+
+	link := c.imUrl + "/v1/admins/"
+	admin := RegisterUserInfo{
+		UserName: userName,
+		Password: password,
+	}
+	buf, err := json.Marshal(admin)
+	if err != nil {
+		return err
+	}
+	_, err = c.request("POST", link, bytes.NewReader(buf), false)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
 //UsersListAll 用户列表
 func (c *Client) UsersListAll(start, count int) (*UserListResponse, error) {
 	args := fmt.Sprintf("/v1/users/?start=%d&count=%d", start, count)

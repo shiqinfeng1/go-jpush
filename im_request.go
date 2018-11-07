@@ -74,6 +74,6 @@ type MessageHistoryResponse struct {
 }
 
 type RegisterUserInfo struct {
-	USerName string `json:"username"`
+	UserName string `json:"username"`
 	Password string `json:"password"`
 }
