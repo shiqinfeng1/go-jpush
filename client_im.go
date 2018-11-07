@@ -104,7 +104,7 @@ func (c *Client) RegisterAdmin(userName, password string) error {
 //         json define yourself
 //     }
 // }
-func (c *Client) SendMessage(fromID, toID, fromName, toName, msgType string, Content interface{}) error {
+func (c *Client) SendMessage(fromID, toID, fromName, toName, msgType string, content interface{}) error {
 
 	link := c.imUrl + "/v1/messages"
 	msg := MessageMinimum{
@@ -118,7 +118,7 @@ func (c *Client) SendMessage(fromID, toID, fromName, toName, msgType string, Con
 		FromID:         fromID,
 		NoOffline:      true,
 		NoNotification: true,
-		MsgBody:        Content,
+		MsgBody:        content,
 	}
 	buf, err := json.Marshal(msg)
 	if err != nil {
